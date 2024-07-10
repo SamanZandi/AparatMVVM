@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="whiteSmoke">#f6f6f6</color>
+    <color name="philippineSilver">#B3B3B3</color>
+    <color name="pink">#ed145b</color>
+    <color name="darkSilver">#6E6E6E</color>
+    <color name="green">#6FC809</color>
+    <color name="red">#FA1515</color>
+
+</resources>
