@@ -19,4 +19,17 @@
    </style>
 
 
+    <!-- Text style for selected state -->
+    <style name="BottomNavTextStyle" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:visibility">visible</item>
+    </style>
+
+    <!-- Text style for unselected state -->
+    <style name="BottomNavTextStyleHidden" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">0sp</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
 </resources>

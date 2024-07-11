@@ -6,12 +6,14 @@ import android.net.ConnectivityManager
 import android.view.View
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.muddassir.connection_checker.ConnectionState
 import com.muddassir.connection_checker.checkConnection
+import com.zandroid.aparatversion2.utils.network.CheckConnection
 
 fun View.visible(isShowLoading:Boolean, content: View){
     if (isShowLoading){
@@ -38,6 +40,15 @@ fun View.showSnackBar(message:String,color:Int){
     snackbar.setBackgroundTint(color)
     snackbar.show()
 }
+
+
+//Check Network
+fun Context.isNetworkAvailable():Boolean{
+    val cm=getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val info=cm.activeNetworkInfo
+    return info !=null && info.isConnected
+}
+
 
 
 

@@ -7,11 +7,14 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.muddassir.connection_checker.ConnectionState
+import com.muddassir.connection_checker.checkConnection
 import com.zandroid.aparatversion2.R
 
 import com.zandroid.aparatversion2.databinding.FragmentSearchBinding
@@ -53,17 +56,17 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setHasOptionsMenu(true)
-
-        binding.apply {
-            //checkInternet
-            checkConnection.observe(viewLifecycleOwner){
-                if (it){
-                    showInternetStatus(true)
-                }else{
-                    showInternetStatus(false)
-                }
-                Log.e( "InternetStatus ", it.toString() )
+        //checkInternet
+        checkConnection.observe(viewLifecycleOwner) { isConnected ->
+            if (isConnected) {
+                showInternetStatus(true)
+            } else {
+                showInternetStatus(false)
             }
+            Log.e("InternetStatus ", isConnected.toString())
+        }
+        binding.apply {
+
 
             //Loading
             viewModel.loading.observe(viewLifecycleOwner) {
@@ -94,6 +97,16 @@ class SearchFragment : Fragment() {
                 }
             }
 
+            viewModel.hasNet.observe(viewLifecycleOwner) {
+                if (it) {
+                    showInternetStatus(true)
+                } else {
+                    showInternetStatus(false)
+                }
+                Log.e("hasNet ", it.toString())
+
+            }
+
             searchEdt.addTextChangedListener {
                 if (it.toString().length > 2) {
                     viewModel.searchVideo(it.toString())
@@ -101,8 +114,6 @@ class SearchFragment : Fragment() {
                     emptyList.visible(true, searchList)
                 }
             }
-
-
 
         }
 

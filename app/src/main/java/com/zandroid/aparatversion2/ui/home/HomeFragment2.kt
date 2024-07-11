@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -23,6 +24,7 @@ import com.zandroid.aparatversion2.ui.home.adapters.VideoAdapter
 import com.zandroid.aparatversion2.utils.CATEGORY_ID
 import com.zandroid.aparatversion2.utils.FROM
 import com.zandroid.aparatversion2.utils.TO
+import com.zandroid.aparatversion2.utils.isNetworkAvailable
 import com.zandroid.aparatversion2.utils.network.CheckConnection
 import com.zandroid.aparatversion2.utils.setupRecyclerView
 import com.zandroid.aparatversion2.utils.visible
@@ -43,8 +45,10 @@ class HomeFragment2 : Fragment() {
     //Adapters
     @Inject
     lateinit var newsAdapter: NewsAdapter
+
     @Inject
     lateinit var categoriesAdapter: CategoriesAdapter
+
     @Inject
     lateinit var videoAdapter: VideoAdapter
 
@@ -55,6 +59,8 @@ class HomeFragment2 : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
     private val pagerSnapHelper: PagerSnapHelper by lazy { PagerSnapHelper() }
 
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentHome2Binding.inflate(layoutInflater)
         return binding.root
@@ -64,23 +70,10 @@ class HomeFragment2 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        loadSpecialList()
-
         binding.apply {
 
-            //checkInternet
-            checkConnection.observe(viewLifecycleOwner){
-                if (it){
-                    showInternetStatus(true)
-                }else{
-                    showInternetStatus(false)
-                }
-                Log.e( "InternetStatus ", it.toString() )
-            }
-
-
             //Loading
-           viewModel.loading.observe(viewLifecycleOwner) {
+            viewModel.loading.observe(viewLifecycleOwner) {
                 if (it) {
                     homeLoading.visible(true, homeContentLay)
                 } else {
@@ -88,21 +81,18 @@ class HomeFragment2 : Fragment() {
                 }
             }
             //News
+            viewModel.loadNews()
             viewModel.newsListLiveData.observe(viewLifecycleOwner) { news ->
-                        newsAdapter.differ.submitList(news)
-                        newsList.setupRecyclerView(
-                            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false), newsAdapter)
-                        pagerSnapHelper.attachToRecyclerView(newsList)
-                        indicator.attachToRecyclerView(newsList, pagerSnapHelper)
+                newsAdapter.differ.submitList(news)
+                newsList.setupRecyclerView(LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false), newsAdapter)
+                pagerSnapHelper.attachToRecyclerView(newsList)
+                indicator.attachToRecyclerView(newsList, pagerSnapHelper)
             }
-           //Categories
+            //Categories
+            viewModel.loadCategories()
             viewModel.categoriesLiveData.observe(viewLifecycleOwner) { category ->
                 categoriesAdapter.setData(category)
-                categoriesList.setupRecyclerView(
-                    LinearLayoutManager(
-                        requireContext(),
-                        LinearLayoutManager.HORIZONTAL, false
-                    ), categoriesAdapter
+                categoriesList.setupRecyclerView(LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false), categoriesAdapter
                 )
 
                 //click Adapter
@@ -118,6 +108,7 @@ class HomeFragment2 : Fragment() {
             }
 
             //Special
+            loadSpecialList()
             viewModel.specialLiveData.observe(viewLifecycleOwner) {
                 videoAdapter.setData(it)
                 videoRecycler.setupRecyclerView(
@@ -127,8 +118,8 @@ class HomeFragment2 : Fragment() {
                     ), videoAdapter
                 )
                 //click
-                videoAdapter.setOnItemClickListener {video->
-                    val direction=HomeFragment2Directions.actionToDetail(video)
+                videoAdapter.setOnItemClickListener { video ->
+                    val direction = HomeFragment2Directions.actionToDetail(video)
                     findNavController().navigate(direction)
                 }
             }
@@ -143,8 +134,8 @@ class HomeFragment2 : Fragment() {
                     ), videoAdapter
                 )
                 //click
-                videoAdapter.setOnItemClickListener {video->
-                    val direction=HomeFragment2Directions.actionToDetail(video)
+                videoAdapter.setOnItemClickListener { video ->
+                    val direction = HomeFragment2Directions.actionToDetail(video)
                     findNavController().navigate(direction)
                 }
             }
@@ -159,41 +150,78 @@ class HomeFragment2 : Fragment() {
                     ), videoAdapter
                 )
                 //click
-                videoAdapter.setOnItemClickListener {video->
-                    val direction=HomeFragment2Directions.actionToDetail(video)
+                videoAdapter.setOnItemClickListener { video ->
+                    val direction = HomeFragment2Directions.actionToDetail(video)
                     findNavController().navigate(direction)
                 }
             }
 
 
+
+           viewModel.hasNet.observe(viewLifecycleOwner) {
+                if (it) {
+                    showInternetStatus(true)
+                } else {
+                    showInternetStatus(false)
+                }
+                Log.e("hasNet ", it.toString())
+
+            }
         }
+
+        //checkInternet
+       checkConnection.observe(viewLifecycleOwner) { isConnected ->
+            if (isConnected) {
+                showInternetStatus(true)
+            } else {
+                showInternetStatus(false)
+            }
+            Log.e("InternetStatus ", isConnected.toString())
+        }
+ /*       checkConnection(this){
+            when(it){
+                ConnectionState.CONNECTED->{
+                    showInternetStatus(true)
+
+                }
+                ConnectionState.DISCONNECTED->{
+                    showInternetStatus(false)
+
+                     }
+                else->{showInternetStatus(false)}
+            }
+        }*/
 
     }
 
 
-
-
-    private fun showInternetStatus(hasNet:Boolean){
+    private fun showInternetStatus(hasNet: Boolean) {
         binding.apply {
-            if (!hasNet){
+            if (!hasNet) {
+                emptyList.visible(true, homeContentLay)
                 emptyLay.emptyImg.setImageResource(R.drawable.disconnect_internet)
                 emptyLay.emptyImg.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red))
                 emptyLay.emptyTxt.setText(getString(R.string.please_check_internet))
                 emptyLay.emptyTxt.setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
-                emptyList.visible(true, homeContentLay)
-            }else{
+                category.visibility=View.GONE
+                videoListTxt.visibility=View.GONE
+
+            } else {
+                category.visibility=View.VISIBLE
+                videoListTxt.visibility=View.VISIBLE
                 emptyList.visible(false, homeContentLay)
             }
         }
     }
 
 
-
     fun loadSpecialList() { viewModel.loadSpecial() }
+
     fun loadBestList() { viewModel.loadBest() }
+
     fun loadNewList() { viewModel.loadNew() }
 
-   override fun onDestroy() {
+    override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
