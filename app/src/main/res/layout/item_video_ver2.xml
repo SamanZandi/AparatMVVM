@@ -33,16 +33,17 @@
 
             <TextView
                 android:id="@+id/txtTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="12dp"
                 android:fontFamily="@font/abel"
                 android:textSize="@dimen/_14sp"
-                tools:text="dgsdfsdf"
                 android:textStyle="bold"
-                android:layout_margin="12dp"
-                app:layout_constraintTop_toTopOf="parent"
+                android:ellipsize="end"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/imgVideo"
-                />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="dgsdfsdf" />
 
 
             <TextView
