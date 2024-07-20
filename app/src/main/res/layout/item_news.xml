@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/imgNews"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="@dimen/_250mdp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,9 +21,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:textSize="@dimen/_18sp"
+        android:textSize="@dimen/_16font_mdp"
         app:layout_constraintBottom_toBottomOf="@+id/imgNews"
-        android:layout_margin="@dimen/_5dp"
+        android:layout_margin="@dimen/_5mdp"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="Football" />
 

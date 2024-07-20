@@ -2,14 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-   android:layout_margin="@dimen/_15dp"
+   android:layout_margin="@dimen/_10mdp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_150dp"
-        android:elevation="@dimen/_2dp"
+        android:layout_height="@dimen/_130mdp"
+        android:elevation="@dimen/_2mdp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +23,7 @@
 
             <ImageView
                 android:id="@+id/imgVideo"
-                android:layout_width="@dimen/_200dp"
+                android:layout_width="@dimen/_160mdp"
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -33,11 +33,11 @@
 
             <TextView
                 android:id="@+id/txtTitle"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/_0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp"
+                android:layout_margin="@dimen/_12mdp"
                 android:fontFamily="@font/abel"
-                android:textSize="@dimen/_14sp"
+                android:textSize="@dimen/_12font_mdp"
                 android:textStyle="bold"
                 android:ellipsize="end"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -50,9 +50,9 @@
                 android:id="@+id/txtTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp"
+                android:layout_margin="@dimen/_12mdp"
                 android:fontFamily="@font/abel"
-                android:textSize="@dimen/_14sp"
+                android:textSize="@dimen/_12font_mdp"
                 tools:text="dgsdfsdf"
                app:layout_constraintTop_toBottomOf="@id/txtTitle"
                 app:layout_constraintStart_toEndOf="@id/imgVideo" />
@@ -61,9 +61,9 @@
                 android:id="@+id/txtViews"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp"
+                android:layout_margin="@dimen/_12mdp"
                 android:fontFamily="@font/abel"
-                android:textSize="@dimen/_14sp"
+                android:textSize="@dimen/_12font_mdp"
                 tools:text="dgsdfsdf"
                 app:layout_constraintTop_toBottomOf="@id/txtTime"
                 app:layout_constraintStart_toEndOf="@id/imgVideo" />
@@ -73,12 +73,12 @@
                 android:id="@+id/txtDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp"
+                android:layout_margin="@dimen/_12mdp"
                 android:fontFamily="@font/abel"
                 android:text="@string/more_info"
                 android:drawablePadding="@dimen/_5dp"
                 android:textColor="@color/pink"
-                android:textSize="@dimen/_16sp"
+                android:textSize="@dimen/_12font_mdp"
                 app:drawableEndCompat="@drawable/baseline_arrow_forward_24"
                 app:drawableTint="@color/pink"
                 app:layout_constraintBottom_toBottomOf="parent"

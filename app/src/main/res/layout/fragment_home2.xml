@@ -3,66 +3,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/whiteSmoke"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.home.HomeFragment2">
+
+
+
+    <!--News-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/newsList"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_250mdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <me.relex.circleindicator.CircleIndicator2
+        android:id="@+id/indicator"
+        android:layout_width="@dimen/_50mdp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_10mdp"
+        app:layout_constraintBottom_toBottomOf="@+id/newsList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/_0dp"
+        android:layout_marginTop="@dimen/_10mdp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/newsList">
 
         <!--Home Content-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/homeContentLay"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <!--News-->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/newsList"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_300dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <me.relex.circleindicator.CircleIndicator2
-                android:id="@+id/indicator"
-                android:layout_width="@dimen/_50dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_10dp"
-                app:layout_constraintBottom_toBottomOf="@+id/newsList"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
 
             <!--Category-->
             <TextView
                 android:id="@+id/category"
+                style="@style/TitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/TitleTextView"
                 android:text="@string/category"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/newsList" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/categoriesList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:layout_marginTop="@dimen/_10dp"
-                android:layout_marginEnd="@dimen/_8dp"
+                android:layout_marginTop="@dimen/_10mdp"
+                android:layout_marginEnd="@dimen/_8mdp"
                 android:clipToPadding="false"
+                android:padding="@dimen/_10mdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/category" />
 
             <!--Video List-->
             <TextView
                 android:id="@+id/videoListTxt"
+                style="@style/TitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/TitleTextView"
                 android:text="@string/video_list"
 
                 app:layout_constraintStart_toStartOf="parent"
@@ -70,14 +77,15 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/videoRecycler"
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10dp"
-                android:layout_marginEnd="@dimen/_8dp"
+                android:layout_marginTop="@dimen/_10mdp"
                 android:clipToPadding="false"
+                android:padding="@dimen/_10mdp"
+
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/videoListTxt" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -103,7 +111,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/emptyList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/_0dp"
         android:layout_margin="@dimen/_10dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"

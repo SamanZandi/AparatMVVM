@@ -109,10 +109,14 @@ dependencies {
     //other
     implementation ("me.relex:circleindicator:2.1.6")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
-
+    implementation ("com.github.MrNouri:DynamicSizes:1.0")
+    
     //check Internet
   implementation ("com.github.muddassir235:connection_checker:1.7")
    implementation ("com.github.raheemadamboev:check-internet-android:1.1.1")
+
+
+
 
 
 }

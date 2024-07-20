@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/emptyImg"
-        android:layout_width="@dimen/_150dp"
-        android:layout_height="@dimen/_150dp"
+        android:layout_width="@dimen/_120mdp"
+        android:layout_height="@dimen/_120mdp"
         android:src="@drawable/empty"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,11 +20,11 @@
         android:id="@+id/emptyTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_15dp"
+        android:layout_marginTop="@dimen/_10mdp"
         android:fontFamily="@font/abel"
         android:text="@string/list_is_empty"
         android:textColor="@color/pink"
-        android:textSize="@dimen/_18sp"
+        android:textSize="@dimen/_15font_mdp"
 
         app:layout_constraintEnd_toEndOf="@+id/emptyImg"
         app:layout_constraintStart_toStartOf="@+id/emptyImg"

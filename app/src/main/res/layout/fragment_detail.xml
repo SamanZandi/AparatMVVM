@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,28 +10,41 @@
 
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
         <!--Layout Icon-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cons_icon"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_400dp"
+            android:layout_height="@dimen/_300mdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
+
+            <!--Title-->
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="@dimen/_0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/abel"
+                android:gravity="center_horizontal"
+                android:padding="@dimen/_10mdp"
+                android:layout_marginTop="@dimen/_10mdp"
+                android:textColor="@color/darkSilver"
+                android:textSize="@dimen/_18font_mdp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="jetpack compose" />
 
             <!--Back-->
             <ImageView
                 android:id="@+id/btnBack"
-                android:layout_width="@dimen/_50dp"
-                android:layout_height="@dimen/_50dp"
+                android:layout_width="@dimen/_45mdp"
+                android:layout_height="@dimen/_45mdp"
                 app:layout_constraintStart_toStartOf="parent"
                 android:background="@drawable/bg_rounded"
-                android:padding="@dimen/_10dp"
-                android:layout_margin="@dimen/_10dp"
+                android:padding="@dimen/_10mdp"
+                android:layout_margin="@dimen/_10mdp"
                 android:src="@drawable/baseline_arrow_back_24"
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/whiteSmoke" />
@@ -39,12 +52,12 @@
             <!--Fav-->
             <ImageView
                 android:id="@+id/btnFav"
-                android:layout_width="@dimen/_50dp"
-                android:layout_height="@dimen/_50dp"
+                android:layout_width="@dimen/_45mdp"
+                android:layout_height="@dimen/_45mdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:background="@drawable/bg_rounded"
-                android:padding="@dimen/_10dp"
-                android:layout_margin="@dimen/_10dp"
+                android:padding="@dimen/_10mdp"
+                android:layout_margin="@dimen/_10mdp"
                 android:src="@drawable/baseline_favorite_24"
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/whiteSmoke" />
@@ -53,7 +66,7 @@
             <ImageView
                 android:id="@+id/imgIconBig"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_300dp"
+                android:layout_height="@dimen/_250mdp"
                 android:alpha="0.3"
                 android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
@@ -62,10 +75,10 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_img"
-                android:layout_width="@dimen/_200dp"
-                android:layout_height="@dimen/_200dp"
-                app:cardCornerRadius="@dimen/_15dp"
-                app:cardElevation="@dimen/_8dp"
+                android:layout_width="@dimen/_150mdp"
+                android:layout_height="@dimen/_150mdp"
+                app:cardCornerRadius="@dimen/_15mdp"
+                app:cardElevation="@dimen/_8mdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
@@ -81,137 +94,121 @@
                     app:layout_constraintStart_toStartOf="parent"
                     tools:src="@tools:sample/backgrounds/scenic" />
 
+
+
+
             </androidx.cardview.widget.CardView>
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
-        <!--Layout Content-->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cons_content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/_15dp"
-
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cons_icon"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <!--Title-->
-
-
-            <!--Description-->
-            <TextView
-                android:id="@+id/txtTitle"
-                android:layout_width="@dimen/_0dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/abel"
-                android:gravity="center_horizontal"
-                android:padding="@dimen/_10dp"
-                android:textColor="@color/pink"
-                android:textSize="@dimen/_18sp"
-                android:textStyle="bold"
-
-                app:layout_constraintEnd_toEndOf="parent"
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_0dp"
+                android:layout_margin="@dimen/_15mdp"
+                android:paddingTop="@dimen/_20mdp"
+                app:layout_constraintBottom_toTopOf="@+id/btnPlay"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="jetpack compose" />
+                app:layout_constraintTop_toBottomOf="@id/cons_icon">
 
-            <TextView
-                android:id="@+id/txtDesc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawablePadding="@dimen/_10dp"
-                android:fontFamily="@font/abel"
-                android:maxLines="2"
-                android:padding="@dimen/_10dp"
-                android:textSize="@dimen/_18sp"
-                app:drawableStartCompat="@drawable/baseline_description_24"
-                app:drawableTint="@color/pink"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txtTitle"
-                tools:text="jetpack composesfsdfsdfsdfsdsdfdsf" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_0dp">
 
 
-            <!--Duration-->
-            <TextView
-                android:id="@+id/txtDuration"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8dp"
-                android:drawablePadding="@dimen/_10dp"
-                android:fontFamily="@font/abel"
-                android:maxLines="2"
-                android:padding="@dimen/_10dp"
-                android:textSize="@dimen/_18sp"
-                app:drawableStartCompat="@drawable/baseline_access_time_24"
-                app:drawableTint="@color/pink"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txtDesc"
-                tools:text="2:13" />
 
-            <!--Views-->
-            <TextView
-                android:id="@+id/txtViews"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8dp"
-                android:drawablePadding="@dimen/_10dp"
-                android:fontFamily="@font/abel"
-                android:maxLines="2"
-                android:padding="@dimen/_10dp"
-                android:textSize="@dimen/_18sp"
-                app:drawableStartCompat="@drawable/baseline_remove_red_eye_24"
-                app:drawableTint="@color/pink"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txtDuration"
-                tools:text="20" />
+                    <!--Description-->
+                    <TextView
+                        android:id="@+id/txtDesc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="@dimen/_10mdp"
+                        android:fontFamily="@font/abel"
+                        android:maxLines="2"
+                        android:padding="@dimen/_10mdp"
+                        android:textSize="@dimen/_18font_mdp"
+                        app:drawableStartCompat="@drawable/baseline_description_24"
+                        app:drawableTint="@color/pink"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txtTitle"
+                        tools:text="jetpack composesfsdfsdfsdfsdsdfdsf" />
 
 
-            <!--Special-->
-            <TextView
-                android:id="@+id/txtSpecial"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8dp"
-                android:drawablePadding="@dimen/_10dp"
-                android:fontFamily="@font/abel"
-                android:maxLines="2"
-                android:padding="@dimen/_10dp"
-                android:textSize="@dimen/_18sp"
-                app:drawableStartCompat="@drawable/baseline_star_24"
-                app:drawableTint="@color/pink"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txtViews"
-                android:text="@string/special" />
+                    <!--Duration-->
+                    <TextView
+                        android:id="@+id/txtDuration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8mdp"
+                        android:drawablePadding="@dimen/_10mdp"
+                        android:fontFamily="@font/abel"
+                        android:maxLines="2"
+                        android:padding="@dimen/_10mdp"
+                        android:textSize="@dimen/_18font_mdp"
+                        app:drawableStartCompat="@drawable/baseline_access_time_24"
+                        app:drawableTint="@color/pink"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txtDesc"
+                        tools:text="2:13" />
+
+                    <!--Views-->
+                    <TextView
+                        android:id="@+id/txtViews"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8mdp"
+                        android:drawablePadding="@dimen/_10mdp"
+                        android:fontFamily="@font/abel"
+                        android:maxLines="2"
+                        android:padding="@dimen/_10mdp"
+                        android:textSize="@dimen/_18font_mdp"
+                        app:drawableStartCompat="@drawable/baseline_remove_red_eye_24"
+                        app:drawableTint="@color/pink"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txtDuration"
+                        tools:text="20" />
+
+
+                    <!--Special-->
+                    <TextView
+                        android:id="@+id/txtSpecial"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8mdp"
+                        android:drawablePadding="@dimen/_10mdp"
+                        android:fontFamily="@font/abel"
+                        android:maxLines="2"
+                        android:padding="@dimen/_10mdp"
+                        android:text="@string/special"
+                        android:textSize="@dimen/_18font_mdp"
+                        app:drawableStartCompat="@drawable/baseline_star_24"
+                        app:drawableTint="@color/pink"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txtViews" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </ScrollView>
+
+
 
 
             <ImageView
                 android:id="@+id/btnPlay"
-                android:layout_width="@dimen/_50dp"
-                android:layout_height="@dimen/_50dp"
+                android:layout_width="@dimen/_50mdp"
+                android:layout_height="@dimen/_50mdp"
+                android:layout_margin="@dimen/_10mdp"
                 android:src="@drawable/baseline_play_circle_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:tint="@color/pink" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
 
-
-
-
-
-
-
-
-
-</androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

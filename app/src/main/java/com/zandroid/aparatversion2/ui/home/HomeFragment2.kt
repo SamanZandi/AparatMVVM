@@ -178,19 +178,6 @@ class HomeFragment2 : Fragment() {
             }
             Log.e("InternetStatus ", isConnected.toString())
         }
- /*       checkConnection(this){
-            when(it){
-                ConnectionState.CONNECTED->{
-                    showInternetStatus(true)
-
-                }
-                ConnectionState.DISCONNECTED->{
-                    showInternetStatus(false)
-
-                     }
-                else->{showInternetStatus(false)}
-            }
-        }*/
 
     }
 
@@ -203,8 +190,8 @@ class HomeFragment2 : Fragment() {
                 emptyLay.emptyImg.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red))
                 emptyLay.emptyTxt.setText(getString(R.string.please_check_internet))
                 emptyLay.emptyTxt.setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
-                category.visibility=View.GONE
-                videoListTxt.visibility=View.GONE
+              category.visibility=View.GONE
+               videoListTxt.visibility=View.GONE
 
             } else {
                 category.visibility=View.VISIBLE

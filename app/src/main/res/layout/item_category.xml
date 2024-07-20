@@ -2,17 +2,17 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="@dimen/_40dp"
-    android:layout_margin="@dimen/_4dp"
-    android:paddingHorizontal="@dimen/_10dp"
+    android:layout_height="@dimen/_30mdp"
+    android:layout_margin="@dimen/_4mdp"
+    android:paddingHorizontal="@dimen/_10mdp"
     android:background="@drawable/bg_rounded_white"
-    android:elevation="@dimen/_2dp"
+    android:elevation="@dimen/_2mdp"
     xmlns:tools="http://schemas.android.com/tools">
 
     <ImageView
         android:id="@+id/catImg"
-        android:layout_width="@dimen/_40dp"
-        android:layout_height="@dimen/_35dp"
+        android:layout_width="@dimen/_30mdp"
+        android:layout_height="@dimen/_30mdp"
         android:scaleType="centerCrop"
         tools:src="@tools:sample/backgrounds/scenic"
         android:background="@drawable/bg_rounded_white"
@@ -28,8 +28,9 @@
         app:layout_constraintEnd_toStartOf="@id/catImg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:paddingEnd="@dimen/_8dp"
+        android:paddingEnd="@dimen/_8mdp"
         tools:text="@string/app_name"
+        android:textSize="@dimen/_10font_mdp"
         android:fontFamily="@font/abel"
         tools:ignore="RtlSymmetry" />
 

@@ -9,8 +9,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgLogo"
-        android:layout_width="@dimen/_100dp"
-        android:layout_height="@dimen/_100dp"
+        android:layout_width="@dimen/_80mdp"
+        android:layout_height="@dimen/_80mdp"
         android:src="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
