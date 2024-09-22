@@ -65,9 +65,9 @@
         android:name="com.zandroid.aparatversion2.ui.detail.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
-
         <argument
-            android:name="videoInfo"
-            app:argType="com.zandroid.aparatversion2.data.model.ResponseVideoList$ResponseVideoListItem" />
+            android:name="video"
+            app:argType="com.zandroid.aparatversion2.data.model.ResponseVideoList$ResponseVideoListItem"
+            app:nullable="true" />
     </fragment>
 </navigation>

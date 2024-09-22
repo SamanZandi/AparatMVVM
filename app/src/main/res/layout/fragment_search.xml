@@ -13,6 +13,7 @@
         android:layout_height="@dimen/_50mdp"
         android:hint="@string/search_here"
         android:layout_margin="@dimen/_10mdp"
+        android:drawablePadding="@dimen/_5mdp"
         android:background="@drawable/bg_rounded_white"
         android:drawableTint="@color/philippineSilver"
         android:drawableStart="@drawable/baseline_search_24"

@@ -12,6 +12,8 @@ import com.zandroid.aparatversion2.data.model.ResponseNews
 import com.zandroid.aparatversion2.data.model.ResponseVideoList
 import com.zandroid.aparatversion2.data.repository.HomeRepository
 import com.zandroid.aparatversion2.utils.network.CheckConnection
+import com.zandroid.aparatversion2.utils.network.NetworkRequest
+import com.zandroid.aparatversion2.utils.network.NetworkResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,121 +25,44 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(private val repository:HomeRepository):ViewModel() {
 
 
-    val newsListLiveData=MutableLiveData<List<ResponseNews.ResponseNewsItem>>()
-    val categoriesLiveData=MutableLiveData<List<ResponseCategory.ResponseCategoryItem>>()
-    val specialLiveData=MutableLiveData<List<ResponseVideoList.ResponseVideoListItem>>()
-    val bestLiveData=MutableLiveData<List<ResponseVideoList.ResponseVideoListItem>>()
-    val newLiveData=MutableLiveData<List<ResponseVideoList.ResponseVideoListItem>>()
-    val loading=MutableLiveData<Boolean>()
-    val hasNet=MutableLiveData<Boolean>()
+    val newsListLiveData=MutableLiveData<NetworkRequest<List<ResponseNews.ResponseNewsItem>>>()
+    val categoriesLiveData=MutableLiveData<NetworkRequest<List<ResponseCategory.ResponseCategoryItem>>>()
+    val specialLiveData=MutableLiveData<NetworkRequest<List<ResponseVideoList.ResponseVideoListItem>>>()
+    val bestLiveData=MutableLiveData<NetworkRequest<List<ResponseVideoList.ResponseVideoListItem>>>()
+    val newLiveData=MutableLiveData<NetworkRequest<List<ResponseVideoList.ResponseVideoListItem>>>()
 
 
-    fun loadNews()=viewModelScope.launch(Dispatchers.IO) {
-        loading.postValue(true)
 
-      try {
-           val response=repository.loadNews()
-
-          if (response.isSuccessful) {
-             hasNet.postValue(true)
-              when (response.code()) {
-                  in 200..202 -> {
-                      loading.postValue(false)
-                      newsListLiveData.postValue(response.body())
-                  }
-              }
-          }
-        }catch (e: Exception){
-            hasNet.postValue(false)
-
-        }
-        loading.postValue(false)
-
+    fun loadNews()=viewModelScope.launch {
+        newsListLiveData.value=NetworkRequest.Loading()
+        val response=repository.loadNews()
+        newsListLiveData.value=NetworkResponse(response).generalNetworkResponse()
         }
 
 
 
-   fun loadCategories()=viewModelScope.launch(Dispatchers.IO) {
-       loading.postValue(true)
-       try {
-
-           val response=repository.loadCategories()
-           if (response.isSuccessful) {
-              hasNet.postValue(true)
-               when (response.code()) {
-                   in 200..202 -> {
-                       loading.postValue(false)
-                       categoriesLiveData.postValue(response.body())
-                   }
-               }
-           }
-       }catch (e:Exception){
-          hasNet.postValue(false)
-       }
-       loading.postValue(false)
-
+   fun loadCategories()=viewModelScope.launch {
+       categoriesLiveData.value=NetworkRequest.Loading()
+       val response=repository.loadCategories()
+       categoriesLiveData.value=NetworkResponse(response).generalNetworkResponse()
     }
 
-    fun loadSpecial()=viewModelScope.launch(Dispatchers.IO) {
-        loading.postValue(true)
-        try {
-
-            val response=repository.loadSpecial()
-            if (response.isSuccessful) {
-                hasNet.postValue(true)
-                when (response.code()) {
-                    in 200..202 -> {
-                        loading.postValue(false)
-                        specialLiveData.postValue(response.body())
-                    }
-                }
-            }
-        }catch (e:Exception){
-         hasNet.postValue(false)
-        }
-        loading.postValue(false)
+    fun loadSpecial()=viewModelScope.launch{
+        specialLiveData.value=NetworkRequest.Loading()
+        val response=repository.loadSpecial()
+        specialLiveData.value=NetworkResponse(response).generalNetworkResponse()
     }
 
-    fun loadBest()=viewModelScope.launch(Dispatchers.IO) {
-        loading.postValue(true)
-        try {
-
-            val response=repository.loadBest()
-            if (response.isSuccessful) {
-               hasNet.postValue(true)
-                when (response.code()) {
-                    in 200..202 -> {
-                        loading.postValue(false)
-                        bestLiveData.postValue(response.body())
-                    }
-                }
-            }
-        }catch (e:Exception){
-           hasNet.postValue(false)
-        }
-        loading.postValue(false)
-
+    fun loadBest()=viewModelScope.launch{
+        bestLiveData.value=NetworkRequest.Loading()
+        val response=repository.loadBest()
+        bestLiveData.value=NetworkResponse(response).generalNetworkResponse()
     }
 
-    fun loadNew()=viewModelScope.launch(Dispatchers.IO) {
-        loading.postValue(true)
-        try {
-
-            val response=repository.loadNew()
-            if (response.isSuccessful) {
-               hasNet.postValue(true)
-                when (response.code()) {
-                    in 200..202 -> {
-                        loading.postValue(false)
-                        newLiveData.postValue(response.body())
-                    }
-                }
-            }
-        }catch (e:Exception){
-           hasNet.postValue(false)
-        }
-        loading.postValue(false)
-
+    fun loadNew()=viewModelScope.launch{
+        newLiveData.value=NetworkRequest.Loading()
+        val response=repository.loadNew()
+        newLiveData.value=NetworkResponse(response).generalNetworkResponse()
     }
 
 }

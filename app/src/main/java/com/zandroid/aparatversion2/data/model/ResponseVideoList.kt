@@ -16,7 +16,7 @@ class ResponseVideoList : ArrayList<ResponseVideoList.ResponseVideoListItem>(){
         @SerializedName("description")
         val description: String?, // Android JetPack tools for android developers
         @SerializedName("icon")
-        val icon: String?, // http://androidsupport.ir/pack/aparat/images/jetpack.png
+        var icon: String?, // http://androidsupport.ir/pack/aparat/images/jetpack.png
         @SerializedName("id")
         val id: String?, // 2
         @SerializedName("link")
@@ -24,10 +24,10 @@ class ResponseVideoList : ArrayList<ResponseVideoList.ResponseVideoListItem>(){
         @SerializedName("special")
         val special: String?, // 1
         @SerializedName("time")
-        val time: String?, // 2:14
+        var time: String?, // 2:14
         @SerializedName("title")
-        val title: String?, // Android JetPack
+        var title: String?, // Android JetPack
         @SerializedName("view")
-        val view: String? // 225
+        var view: String? // 225
     ):Parcelable
 }

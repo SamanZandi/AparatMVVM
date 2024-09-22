@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zandroid.aparatversion2.data.model.ResponseVideoList
 import com.zandroid.aparatversion2.data.repository.SearchRepository
+import com.zandroid.aparatversion2.utils.network.NetworkRequest
+import com.zandroid.aparatversion2.utils.network.NetworkResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,39 +18,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(private val repository: SearchRepository):ViewModel(){
-    val searchListLiveData=MutableLiveData<List<ResponseVideoList.ResponseVideoListItem>>()
-    val loading=MutableLiveData<Boolean>(false)
-    //check list empty or not!
-    val empty=MutableLiveData<Boolean>()
+    val searchListLiveData=MutableLiveData<NetworkRequest<List<ResponseVideoList.ResponseVideoListItem>>>()
 
-    val hasNet=MutableLiveData<Boolean>()
+    fun searchVideo(title:String)=viewModelScope.launch {
+       searchListLiveData.value=NetworkRequest.Loading()
+       val response=repository.searchVideo(title)
+        searchListLiveData.value=NetworkResponse(response).generalNetworkResponse()
 
 
-    fun searchVideo(title:String)=viewModelScope.launch(Dispatchers.IO) {
-        try {
-            loading.postValue(true)
-            val response=repository.searchVideo(title)
-            if (response.isSuccessful) {
-                hasNet.postValue(true)
-                when (response.code()) {
-                    in 200..202 -> {
-                        if (response.body()!!.isNotEmpty()){
-                            loading.postValue(false)
-                            searchListLiveData.postValue(response.body())
-                            empty.postValue(false)
-                        }else{
-                            empty.postValue(true)
-                            searchListLiveData.postValue(emptyList())
-                        }
-
-                    }
-                }
-            }
-
-        }catch (e: Exception) {
-            hasNet.postValue(false)
-        }
-        loading.postValue(false)
     }
 
 

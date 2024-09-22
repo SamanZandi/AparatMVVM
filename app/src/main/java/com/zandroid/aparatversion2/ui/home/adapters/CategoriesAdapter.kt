@@ -6,6 +6,7 @@ import androidx.core.graphics.drawable.toBitmap
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.request.CachePolicy
 import com.zandroid.aparatversion2.R
 import com.zandroid.aparatversion2.data.model.ResponseCategory
 import com.zandroid.aparatversion2.data.model.ResponseCategory.ResponseCategoryItem
@@ -40,6 +41,8 @@ class CategoriesAdapter @Inject constructor():RecyclerView.Adapter<CategoriesAda
                 catImg.load(item.icon){
                     crossfade(true)
                     crossfade(500)
+                    memoryCachePolicy(CachePolicy.ENABLED)
+                    error(R.drawable.ic_placeholder)
                 }
                 catTitle.text=item.title
 

@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.request.CachePolicy
 import com.bumptech.glide.Glide
+import com.zandroid.aparatversion2.R
 import com.zandroid.aparatversion2.data.model.ResponseNews
 import com.zandroid.aparatversion2.data.model.ResponseNews.ResponseNewsItem
 import com.zandroid.aparatversion2.databinding.ItemNewsBinding
@@ -40,6 +42,8 @@ class NewsAdapter @Inject constructor():RecyclerView.Adapter<NewsAdapter.ViewHol
               imgNews.load(item.icon){
                     crossfade(true)
                     crossfade(500)
+                  memoryCachePolicy(CachePolicy.ENABLED)
+                  error(R.drawable.ic_placeholder)
                 }
                 txtNews.text=item.title
 

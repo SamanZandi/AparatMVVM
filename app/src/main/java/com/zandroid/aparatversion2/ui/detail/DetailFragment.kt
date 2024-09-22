@@ -25,6 +25,7 @@ import com.zandroid.aparatversion2.utils.showSnackBar
 import com.zandroid.aparatversion2.viewModel.VideoDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
@@ -33,14 +34,11 @@ class DetailFragment : Fragment() {
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
 
-    @Inject
-    lateinit var videoEntity: VideoEntity
-
     //Other
     private val viewModel:VideoDetailViewModel by viewModels()
     private val args:DetailFragmentArgs by navArgs()
     private var isFavorite=false
-
+    private var data by Delegates.notNull<ResponseVideoList.ResponseVideoListItem>()
 
 
     override fun onCreateView(
@@ -54,51 +52,51 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-         val video= args.videoInfo
-
+        data= args.video!!
         binding.apply {
-
             //back
             btnBack.setOnClickListener { findNavController().navigateUp() }
+            //load details
+            initDetailData()
+        }
+    }
+
+    private fun initDetailData(){
+        binding.apply {
 
             //Favorite
-            videoEntity.id = video.id!!.toInt()
-            videoEntity.title = video.title!!
-            videoEntity.icon = video.icon!!
-            videoEntity.view = video.view!!
-            videoEntity.time=video.time!!
-
-
+            val videoEntity=VideoEntity(data.id!!.toInt(),data)
 
             //Load Images
-            imgIconBig.load(video.icon){
+            imgIconBig.load(data.icon){
                 crossfade(true)
                 crossfade(500)
             }
-            imgIcon.load(video.icon){
+            imgIcon.load(data.icon){
                 crossfade(true)
                 crossfade(500)
             }
 
-            txtTitle.text=video.title
-            txtDesc.text=video.description
-            txtDuration.text=video.time
-            txtViews.text=video.view
+            txtTitle.text=data.title
+            txtDesc.text=data.description
+            txtDuration.text=data.time
+            txtViews.text=data.view
 
-            if (video.special=="1"){
+            if (data.special=="1"){
                 txtSpecial.setTextColor(ContextCompat.getColor(requireContext(),R.color.pink))
             }else{
                 txtSpecial.setTextColor(ContextCompat.getColor(requireContext(),R.color.philippineSilver))
             }
 
             //go to player page
-          btnPlay.setOnClickListener {
+            btnPlay.setOnClickListener {
                 val intent=Intent(activity,PlayerActivity::class.java)
-                intent.putExtra(VIDEO_LINK,video.link)
+                intent.putExtra(VIDEO_LINK,data.link)
                 startActivity(intent)
             }
 
-            viewModel.existsVideo(videoEntity.id)
+
+            viewModel.existsVideo(data.id!!.toInt())
             viewModel.existLiveData.observe(viewLifecycleOwner){
                 isFavorite=it
                 if (isFavorite){
@@ -110,27 +108,28 @@ class DetailFragment : Fragment() {
 
             //click save,delete
             btnFav.setOnClickListener {
-                    if (isFavorite){
-                        isFavorite=false
-                        viewModel.deleteVideo(videoEntity)
-                       btnFav.setColorFilter(ContextCompat.getColor(requireContext(),R.color.whiteSmoke))
-                        it.showSnackBar("${video.title} has removed from favorite list",
-                            ContextCompat.getColor(requireContext(),R.color.red))
+                if (isFavorite){
+                    isFavorite=false
+                    viewModel.deleteVideo(videoEntity)
+                    btnFav.setColorFilter(ContextCompat.getColor(requireContext(),R.color.whiteSmoke))
+                    it.showSnackBar("${data.title} has removed from favorite list",
+                        ContextCompat.getColor(requireContext(),R.color.red))
 
-                    }else{
-                        isFavorite=true
-                        viewModel.saveVideo(videoEntity)
-                        btnFav.setColorFilter(ContextCompat.getColor(requireContext(),R.color.pink))
-                        it.showSnackBar("${video.title} has enterd favorite list :)",
-                            ContextCompat.getColor(requireContext(),R.color.green))
-                    }
+                }else{
+                    isFavorite=true
+                   viewModel.saveVideo(videoEntity)
+                    btnFav.setColorFilter(ContextCompat.getColor(requireContext(),R.color.pink))
+                    it.showSnackBar("${data.title} has enterd favorite list :)",
+                        ContextCompat.getColor(requireContext(),R.color.green))
+                }
             }
-
-
-
-
         }
+
+
     }
+
+
+
 
     override fun onDestroy() {
         super.onDestroy()

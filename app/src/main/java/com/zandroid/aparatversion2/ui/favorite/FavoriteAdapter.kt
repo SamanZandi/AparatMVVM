@@ -44,17 +44,17 @@ class FavoriteAdapter @Inject constructor():RecyclerView.Adapter<FavoriteAdapter
         @SuppressLint("SetTextI18n")
         fun bind(item: VideoEntity){
             binding.apply {
-               imgVideo.load(item.icon){
+               imgVideo.load(item.response.icon){
                     crossfade(true)
                     crossfade(500)
                 }
 
-                txtTitle.text=item.title
-                txtTime.text="duration: ${item.time}"
-                txtViews.text="views: ${item.view}"
+                txtTitle.text=item.response.title
+                txtTime.text="duration: ${item.response.time}"
+                txtViews.text="views: ${item.response.view}"
 
 
-                txtDetail.visibility=View.GONE
+
                 //click
                  txtDetail.setOnClickListener {
                     onItemClickListener?.let {

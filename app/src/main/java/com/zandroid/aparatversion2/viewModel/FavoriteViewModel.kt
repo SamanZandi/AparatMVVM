@@ -4,8 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zandroid.aparatversion2.data.database.VideoEntity
+import com.zandroid.aparatversion2.data.model.ResponseVideoList.ResponseVideoListItem
 import com.zandroid.aparatversion2.data.repository.FavoriteRepository
-import com.zandroid.aparatversion2.data.repository.SearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -15,7 +15,7 @@ class FavoriteViewModel @Inject constructor(private val repository: FavoriteRepo
     val favoriteList=MutableLiveData<List<VideoEntity>>()
     val empty=MutableLiveData<Boolean>()
 
-    fun getfavorites()=viewModelScope.launch {
+    fun getFavorites()=viewModelScope.launch {
         val response=repository.getAllFavorites()
         if (response.isNotEmpty()){
             favoriteList.postValue(response)

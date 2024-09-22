@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.request.CachePolicy
 import com.bumptech.glide.Glide
 import com.squareup.picasso.Picasso
 import com.zandroid.aparatversion2.R
@@ -45,6 +46,8 @@ class VideoAdapter @Inject constructor():RecyclerView.Adapter<VideoAdapter.ViewH
                imgVideo.load(item.icon){
                     crossfade(true)
                     crossfade(500)
+                   memoryCachePolicy(CachePolicy.ENABLED)
+                   error(R.drawable.ic_placeholder)
                 }
 
                 txtTitle.text=item.title
