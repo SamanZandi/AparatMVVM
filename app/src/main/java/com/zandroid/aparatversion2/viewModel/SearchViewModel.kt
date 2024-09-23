@@ -24,8 +24,6 @@ class SearchViewModel @Inject constructor(private val repository: SearchReposito
        searchListLiveData.value=NetworkRequest.Loading()
        val response=repository.searchVideo(title)
         searchListLiveData.value=NetworkResponse(response).generalNetworkResponse()
-
-
     }
 
 

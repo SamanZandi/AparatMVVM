@@ -1,5 +1,6 @@
 package com.zandroid.aparatversion2.ui.search
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -28,6 +29,7 @@ import com.zandroid.aparatversion2.utils.visible
 import com.zandroid.aparatversion2.viewModel.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
@@ -44,6 +46,7 @@ class SearchFragment : Fragment() {
 
     //Other
     private val viewModel: SearchViewModel by viewModels()
+    private var isNetworkAvailable by Delegates.notNull<Boolean>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,54 +62,62 @@ class SearchFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
+
         binding.apply {
             //checkInternet
-            initDisconnectInternet()
-            checkConnection.observe(viewLifecycleOwner) { isConnected ->
-                if (isConnected) {
-                    showInternetStatus(true)
+            checkConnection.observe(viewLifecycleOwner) { state ->
+                isNetworkAvailable=state
+                if (state) {
+                    callSearchApi()
+
                 } else {
-                    showInternetStatus(false)
+                   initDisconnectInternet()
                 }
-                Log.e("InternetStatus ", isConnected.toString())
-            }
-            //Search
-            viewModel.searchListLiveData.observe(viewLifecycleOwner) {response->
-                when(response){
-                    is NetworkRequest.Loading->{
-                        searchLoading.visible(true,searchList)
-                    }
-                    is NetworkRequest.Success->{
-                        searchLoading.visible(false,searchList)
-                        response.data.let {
-                            videoAdapter.setData(it!!)
-                            searchList.setupRecyclerView(LinearLayoutManager(requireContext()), videoAdapter)
-
-                            //click
-                            videoAdapter.setOnItemClickListener { video ->
-                                val direction = SearchFragmentDirections.actionToDetail(video)
-                                findNavController().navigate(direction)
-                            }
-                        }
-                    }
-                    is NetworkRequest.Error->{
-                        searchLoading.visible(false,searchList)
-                        root.showSnackBar(response.message!!,R.color.philippineSilver)
-                    }
-
-                }
-                searchEdt.addTextChangedListener {
-                    if (it.toString().length > 2) {
-                        viewModel.searchVideo(it.toString())
-                    } else {
-                        emptyList.visible(true, searchList)
-                    }
-                }
-
+                Log.e("InternetStatus ", state.toString())
             }
 
+            searchEdt.addTextChangedListener {
+                if (it.toString().length > 2 && isNetworkAvailable ) {
+                    emptyList.visible(false, searchList)
+                    viewModel.searchVideo(it.toString())
+                } else {
+                    emptyList.visible(true, searchList)
+                }
+            }
         }
 
+    }
+
+    private fun callSearchApi(){
+      binding.apply {
+          //Search
+          viewModel.searchListLiveData.observe(viewLifecycleOwner) {response->
+              when(response){
+                  is NetworkRequest.Loading->{
+                      searchLoading.visible(true,searchList)
+                  }
+                  is NetworkRequest.Success->{
+                      searchLoading.visible(false,searchList)
+                      response.data.let {
+                          videoAdapter.setData(it!!)
+                          searchList.setupRecyclerView(LinearLayoutManager(requireContext()), videoAdapter)
+                          //click
+                          videoAdapter.setOnItemClickListener { video ->
+                              val direction = SearchFragmentDirections.actionToDetail(video)
+                              findNavController().navigate(direction)
+                          }
+                      }
+                  }
+                  is NetworkRequest.Error->{
+                      searchLoading.visible(false,searchList)
+                      root.showSnackBar(response.message!!,R.color.philippineSilver)
+                  }
+
+              }
+
+
+          }
+      }
     }
 
     private fun initDisconnectInternet(){
@@ -117,17 +128,8 @@ class SearchFragment : Fragment() {
             emptyLay.txtEmptyList.compoundDrawables[1].setTint(ContextCompat.getColor(requireContext(),R.color.red))
         }
     }
-    private fun showInternetStatus(hasNet:Boolean){
-        binding.apply {
-            if (!hasNet){
-                emptyList.visible(true, searchList)
-                initDisconnectInternet()
 
-            }else{
-                emptyList.visible(false, searchList)
-            }
-        }
-    }
+
 
     @Deprecated("Deprecated in Java")
     override fun onPrepareOptionsMenu(menu: Menu) {
