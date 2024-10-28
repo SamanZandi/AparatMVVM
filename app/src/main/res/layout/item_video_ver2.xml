@@ -6,85 +6,93 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_120mdp"
-        android:elevation="@dimen/_2mdp"
+        android:layout_height="@dimen/_100mdp"
+        android:elevation="@dimen/_8mdp"
         android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
 
-        <ImageView
-            android:id="@+id/imgVideo"
-            android:layout_width="@dimen/_160mdp"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/backgrounds/scenic" />
-
-        <TextView
-            android:id="@+id/txtTitle"
-            android:layout_width="@dimen/_0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_12mdp"
-            android:fontFamily="@font/abel"
-            android:textSize="@dimen/_10font_mdp"
-            android:textStyle="bold"
-            android:ellipsize="end"
-            android:maxLines="1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imgVideo"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="dgsdfsdf" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
-        <TextView
-            android:id="@+id/txtTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_12mdp"
-            android:fontFamily="@font/abel"
-            android:textSize="@dimen/_10font_mdp"
-            tools:text="dgsdfsdf"
-            app:layout_constraintTop_toBottomOf="@id/txtTitle"
-            app:layout_constraintStart_toEndOf="@id/imgVideo" />
+            <ImageView
+                android:id="@+id/imgVideo"
+                android:layout_width="@dimen/_150mdp"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/backgrounds/scenic" />
 
-        <TextView
-            android:id="@+id/txtViews"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_12mdp"
-            android:fontFamily="@font/abel"
-            android:textSize="@dimen/_10font_mdp"
-            tools:text="dgsdfsdf"
-            app:layout_constraintTop_toBottomOf="@id/txtTime"
-            app:layout_constraintStart_toEndOf="@id/imgVideo" />
-
-
-        <TextView
-            android:id="@+id/txtDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_12mdp"
-            android:drawablePadding="@dimen/_5dp"
-            android:fontFamily="@font/abel"
-            android:text="@string/more_info"
-            android:textColor="@color/pink"
-            android:textSize="@dimen/_10font_mdp"
-            app:drawableEndCompat="@drawable/baseline_arrow_forward_24"
-            app:drawableTint="@color/pink"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtViews" />
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="@dimen/_0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_12mdp"
+                android:fontFamily="@font/abel"
+                android:textSize="@dimen/_10font_mdp"
+                android:textStyle="bold"
+                android:ellipsize="end"
+                android:maxLines="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imgVideo"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="dgsdfsdf" />
 
 
+            <TextView
+                android:id="@+id/txtTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_12mdp"
+                android:fontFamily="@font/abel"
+                android:textSize="@dimen/_10font_mdp"
+                tools:text="dgsdfsdf"
+                app:layout_constraintTop_toBottomOf="@id/txtTitle"
+                app:layout_constraintStart_toEndOf="@id/imgVideo" />
+
+            <TextView
+                android:id="@+id/txtViews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_12mdp"
+                android:fontFamily="@font/abel"
+                android:textSize="@dimen/_10font_mdp"
+                tools:text="dgsdfsdf"
+                app:layout_constraintTop_toBottomOf="@id/txtTime"
+                app:layout_constraintStart_toEndOf="@id/imgVideo" />
+
+
+            <TextView
+                android:id="@+id/txtDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_12mdp"
+                android:drawablePadding="@dimen/_5dp"
+                android:fontFamily="@font/abel"
+                android:text="@string/more_info"
+                android:textColor="@color/pink"
+                android:textSize="@dimen/_10font_mdp"
+                app:drawableEndCompat="@drawable/baseline_arrow_forward_24"
+                app:drawableTint="@color/pink"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtViews" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
