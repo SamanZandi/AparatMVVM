@@ -8,7 +8,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_100mdp"
+        android:layout_height="@dimen/_120mdp"
         android:elevation="@dimen/_8mdp"
         android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"

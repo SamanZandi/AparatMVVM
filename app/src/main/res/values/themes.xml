@@ -32,4 +32,13 @@
         <item name="android:visibility">gone</item>
     </style>
 
+
+    <!--TextInputLayout-->
+    <style name="CustomFilledBox" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="hintTextColor">@color/pink</item>
+        <item name="boxStrokeColor">@color/pink</item>
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="startIconTint">@color/pink</item>
+    </style>
+
 </resources>

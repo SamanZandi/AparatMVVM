@@ -3,7 +3,9 @@ package com.zandroid.aparatversion2.data.server
 import com.zandroid.aparatversion2.data.model.ResponseCategory
 import com.zandroid.aparatversion2.data.model.ResponseNews
 import com.zandroid.aparatversion2.data.model.ResponseVideoList
+import com.zandroid.aparatversion2.data.model.register.ResponseRegister
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -11,6 +13,16 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface ApiServices {
+
+    @POST("register.php")
+    @FormUrlEncoded
+    suspend fun registerUser(@Field("username") username: String,
+                             @Field("password") password: String ):Response<ResponseRegister>
+
+    @POST("login.php")
+    @FormUrlEncoded
+    suspend fun loginUser(@Field("username") username: String,
+                             @Field("password") password: String ):Response<ResponseRegister>
 
     @GET("getNews.php")
     suspend fun loadNews():Response<List<ResponseNews.ResponseNewsItem>>

@@ -115,6 +115,9 @@ dependencies {
   implementation ("com.github.muddassir235:connection_checker:1.7")
    implementation ("com.github.raheemadamboev:check-internet-android:1.1.1")
 
+    //DataStore
+    implementation ("androidx.datastore:datastore-preferences:1.1.1")
+
 
 
 

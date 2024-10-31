@@ -15,3 +15,7 @@ const val VIDEO_TABLE="video_table"
 const val VIDEO_DATABASE="video_database"
 
 const val VIDEO_LINK="video_link"
+
+//DataStore
+const val CODE="code"
+const val STORE_STATE="store_state"

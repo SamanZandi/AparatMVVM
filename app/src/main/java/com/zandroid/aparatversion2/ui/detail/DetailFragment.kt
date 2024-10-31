@@ -112,15 +112,13 @@ class DetailFragment : Fragment() {
                     isFavorite=false
                     viewModel.deleteVideo(videoEntity)
                     btnFav.setColorFilter(ContextCompat.getColor(requireContext(),R.color.whiteSmoke))
-                    it.showSnackBar("${data.title} has removed from favorite list",
-                        ContextCompat.getColor(requireContext(),R.color.red))
+                    it.showSnackBar("${data.title} has removed from favorite list",R.color.red)
 
                 }else{
                     isFavorite=true
                    viewModel.saveVideo(videoEntity)
                     btnFav.setColorFilter(ContextCompat.getColor(requireContext(),R.color.pink))
-                    it.showSnackBar("${data.title} has enterd favorite list :)",
-                        ContextCompat.getColor(requireContext(),R.color.green))
+                    it.showSnackBar("${data.title} has enterd favorite list :)", R.color.green)
                 }
             }
         }

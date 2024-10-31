@@ -37,7 +37,7 @@ fun RecyclerView.setupRecyclerView(layoutManager: RecyclerView.LayoutManager, ad
 //SnackBar
 fun View.showSnackBar(message:String,color:Int){
     val snackbar= this.let { Snackbar.make(it,message,Snackbar.LENGTH_SHORT) }
-    snackbar.setBackgroundTint(color)
+    snackbar.setBackgroundTint(ContextCompat.getColor(context,color))
     snackbar.show()
 }
 

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.login.LoginFragment">
+
+    <!--Logo-->
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/video_roll_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/philippineSilver"
+        android:layout_marginTop="@dimen/_50mdp"/>
+
+
+    <!--Username-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/usernameInput"
+        style="@style/CustomFilledBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_20mdp"
+        android:hint="@string/username"
+        app:startIconDrawable="@drawable/round_account_circle_24"
+        android:layout_marginTop="@dimen/_30mdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgLogo">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/usernameEdt"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_12font_mdp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!--Password-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passInput"
+        style="@style/CustomFilledBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_20mdp"
+        android:hint="@string/Password"
+        android:layout_marginTop="@dimen/_30mdp"
+        app:startIconDrawable="@drawable/baseline_password_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usernameInput"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/darkSilver">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passEdt"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_12font_mdp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <!--Login btn-->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLogin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/login"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12mdp"
+        app:backgroundTint="@color/pink"
+        app:cornerRadius="@dimen/_4mdp"
+        android:layout_marginTop="@dimen/_50mdp"
+        app:layout_constraintEnd_toEndOf="@+id/passInput"
+        app:layout_constraintStart_toStartOf="@+id/passInput"
+        app:layout_constraintTop_toBottomOf="@+id/passInput" />
+
+
+    <!--Register-->
+    <TextView
+        android:id="@+id/txtRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:text="@string/haven_t_registered_yet_register"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="@dimen/_10mdp"
+        android:clickable="true"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.zandroid.aparatversion2.ui
 
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -40,15 +41,17 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNav.setupWithNavController(navHost.navController)
 
         navHost.navController.addOnDestinationChangedListener{_,destination,_ ->
-            if (destination.id== R.id.splashFragment || destination.id== R.id.detailFragment){
-                binding.toolbar.visibility= View.GONE
-                binding.bottomNav.visibility= View.GONE
-            }else{
-              binding.toolbar.visibility= View.VISIBLE
-                binding.bottomNav.visibility= View.VISIBLE
-            }
+          when(destination.id){
+              R.id.splashFragment ->menuVisible(false)
+              R.id.detailFragment ->menuVisible(false)
+              R.id.registerFragment->menuVisible(false)
+              R.id.loginFragment->menuVisible(false)
+              else->menuVisible(true)
+          }
 
         }
+
+
 
             //Filter
             binding.toolbar.setOnMenuItemClickListener {
@@ -58,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                         return@setOnMenuItemClickListener true
                     }
                     R.id.exit->{
-                        finishAffinity()
+                        navHost.navController.navigate(R.id.loginFragment)
                         return@setOnMenuItemClickListener true
                     }
 
@@ -71,6 +74,19 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+
+
+    private fun menuVisible(isVisible:Boolean){
+        binding.apply {
+            if (isVisible){
+                toolbar.visibility= View.VISIBLE
+                bottomNav.visibility= View.VISIBLE
+            }else{
+                toolbar.visibility= View.GONE
+               bottomNav.visibility= View.GONE
+            }
+        }
+    }
 
     //show menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -96,6 +112,9 @@ class MainActivity : AppCompatActivity() {
         val dialog: AlertDialog = builder.create()
         dialog.show()
     }
+
+
+
     override fun onDestroy() {
         super.onDestroy()
         _binding=null
