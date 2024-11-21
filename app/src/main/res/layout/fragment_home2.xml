@@ -6,6 +6,8 @@
     android:background="@color/whiteSmoke"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.home.HomeFragment2">
+
+        <!--Home Content-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/homeContentLay"
         android:layout_width="match_parent"
@@ -18,10 +20,10 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/newsList"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_250mdp"
+            android:layout_height="@dimen/_180mdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
+            <!--Indicator-->
         <me.relex.circleindicator.CircleIndicator2
             android:id="@+id/indicator"
             android:layout_width="@dimen/_50mdp"
@@ -36,14 +38,13 @@
             android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_0dp"
-            android:layout_marginTop="@dimen/_10mdp"
+            android:layout_marginTop="@dimen/_8mdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/newsList">
 
             <!--Home Content-->
             <androidx.constraintlayout.widget.ConstraintLayout
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -64,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_8mdp"
                     android:clipToPadding="false"
-                    android:padding="@dimen/_10mdp"
+                    android:padding="@dimen/_8mdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/category" />
 
@@ -75,6 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/video_list"
+
                     android:layout_marginStart="@dimen/_5mdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/videoRecycler"
@@ -85,8 +87,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clipToPadding="false"
-                    android:padding="@dimen/_10mdp"
-
+                    android:padding="@dimen/_8mdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/videoListTxt" />
 
@@ -122,6 +123,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_0dp"
         android:layout_margin="@dimen/_10dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

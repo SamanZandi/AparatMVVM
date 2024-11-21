@@ -9,12 +9,12 @@
     <string name="category">Categories</string>
     <string name="special">Special</string>
     <string name="search_here">search here ...</string>
-    <string name="list_is_empty">List is empty</string>
+    <string name="list_is_empty">not found any items!</string>
     <string name="more_info">More Info</string>
     <string name="filter">filter</string>
     <string name="exit">exit</string>
     <string name="video_list">Video List</string>
-    <string name="please_check_internet">please check Internet and turn off Vpn!!</string>
+    <string name="please_check_internet">please check Internet</string>
     <string name="username">username</string>
     <string name="Password">password\n</string>
     <string name="submit">submit</string>

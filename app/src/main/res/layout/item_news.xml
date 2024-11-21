@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/imgNews"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_250mdp"
+        android:layout_height="@dimen/_180mdp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

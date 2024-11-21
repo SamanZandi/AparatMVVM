@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import com.muddassir.connection_checker.ConnectionState
 import com.muddassir.connection_checker.checkConnection
 import com.zandroid.aparatversion2.R
+import com.zandroid.aparatversion2.data.model.ResponseNews
 import com.zandroid.aparatversion2.data.model.ResponseVideoList
 import com.zandroid.aparatversion2.databinding.FragmentHome2Binding
 import com.zandroid.aparatversion2.ui.home.adapters.CategoriesAdapter
@@ -34,6 +35,7 @@ import com.zandroid.aparatversion2.utils.showSnackBar
 import com.zandroid.aparatversion2.utils.visible
 import com.zandroid.aparatversion2.viewModel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import xyz.teamgravity.checkinternet.CheckInternet
 import javax.inject.Inject
@@ -64,6 +66,7 @@ class HomeFragment2 : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
     private val pagerSnapHelper: PagerSnapHelper by lazy { PagerSnapHelper() }
     private var isNetworkAvailable by Delegates.notNull<Boolean>()
+    private var autoScrollIndex=0
 
 
     override fun onCreateView(
@@ -110,11 +113,27 @@ class HomeFragment2 : Fragment() {
                         binding.newsList.setupRecyclerView(LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false), newsAdapter)
                         pagerSnapHelper.attachToRecyclerView(binding.newsList)
                         binding.indicator.attachToRecyclerView(binding.newsList, pagerSnapHelper)
+                        setupAutoScrollSlider(news!!.toMutableList())
                     }
 
                 }
                 is NetworkRequest.Error->{}
             }
+        }
+    }
+
+    private fun setupAutoScrollSlider(list:List<ResponseNews.ResponseNewsItem>){
+        lifecycleScope.launch {
+            repeat(100){
+                delay(5000)
+                if(autoScrollIndex<list.size){
+                    autoScrollIndex++
+                }else{
+                    autoScrollIndex=0
+                }
+                binding.newsList.smoothScrollToPosition(autoScrollIndex)
+            }
+
         }
     }
 
